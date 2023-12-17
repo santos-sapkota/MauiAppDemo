@@ -32,6 +32,7 @@
                         {
                             <button class=" btn btn-sm btn-warning" @onclick="() => CompleteTask(toDoModel.ID)">Complete</button>
                         }
+                        <button class="btn btn-sm btn-info" @onclick="() => EditTask(toDoModel.ID)">Edit</button>
                     </td>
                 </tr>
             }
@@ -45,8 +46,19 @@
 
     private void AddToDo()
     {
-        toDo.ID = (toDos.Count + 1);
-        toDos.Add(toDo);
+        if (toDo.ID == 0)
+        {
+            toDo.ID = (toDos.Count + 1);
+            toDos.Add(toDo);
+        }
+        else
+        {
+            var toEdit = toDos.Find(x => x.ID == toDo.ID);
+            if (toEdit != null)
+            {
+                toEdit.Task = toDo.Task;
+            }
+        }
         toDo = new();
     }
 
@@ -55,5 +67,10 @@
         var toComplete = toDos.Find(x => x.ID == id);
         if (toComplete != null)
             toComplete.IsComplete = true;
+    }
+
+    private void EditTask(int id)
+    {
+        toDo = toDos.Find(x => x.ID == id) ?? new();
     }
 }
