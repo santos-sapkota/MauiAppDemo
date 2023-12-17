@@ -1,0 +1,59 @@
+﻿<EditForm Model="@toDo">
+    <div>
+        <label for="task" class="form-label"> Task: </label>
+        <input type="text" @bind-value="toDo.Task" class="form-control" id="toDoTask" />
+    </div>
+    <div>
+        <button class="btn btn-primary" @onclick="AddToDo">Add</button>
+    </div>
+</EditForm>
+
+<h1>ToDo Tasks</h1>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Task</th>
+                <th>Is Completed?</th>
+                <th>Complete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var toDoModel in toDos)
+            {
+                <tr>
+                    <td>@toDoModel.ID</td>
+                    <td>@toDoModel.Task</td>
+                    <td>@toDoModel.IsComplete</td>
+                    <td>
+                        @if (!toDoModel.IsComplete)
+                        {
+                            <button class=" btn btn-sm btn-warning" @onclick="() => CompleteTask(toDoModel.ID)">Complete</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<ToDoModel> toDos = new();
+    private ToDoModel toDo = new();
+
+    private void AddToDo()
+    {
+        toDo.ID = (toDos.Count + 1);
+        toDos.Add(toDo);
+        toDo = new();
+    }
+
+    private void CompleteTask(int id)
+    {
+        var toComplete = toDos.Find(x => x.ID == id);
+        if (toComplete != null)
+            toComplete.IsComplete = true;
+    }
+}
