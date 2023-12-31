@@ -15,3 +15,11 @@
         </article>
     </main>
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        UserService.SeedUsers();
+        PDFDemoService.SavePDF();
+    }
+}
