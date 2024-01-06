@@ -4,4 +4,19 @@
 
 Welcome to your new app.
 
+<input type="text" @bind="NewValue" @oninput="OnInputChange" />
+
+<label>@TestField</label>
+
 <ToDo></ToDo>
+
+@code {
+    public string? TestField = null;
+    public string? NewValue = null;
+
+    private void OnInputChange(ChangeEventArgs eventArgs)
+    {
+        if (eventArgs != null && eventArgs.Value != null)
+            TestField = eventArgs.Value.ToString();
+    }
+}
