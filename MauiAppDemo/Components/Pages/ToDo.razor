@@ -1,4 +1,6 @@
-﻿<EditForm Model="@toDo">
+﻿@page "/todo"
+
+<EditForm Model="@toDo">
     <div>
         <label for="task" class="form-label"> Task: </label>
         <input type="text" @bind-value="toDo.Task" class="form-control" id="toDoTask" />
