@@ -1,0 +1,28 @@
+﻿<h3>NewComponent</h3>
+
+@if (TestName != null && TestName.Trim().Length > 0)
+{
+    <p>@TestName</p>
+}
+
+<button @onclick="TestCallBack">Test </button>
+
+<p>Cascading Value: @_demo.Value</p>
+
+<button @onclick="UpdateValue">Update Value</button>
+
+@code {
+    [Parameter]
+    public string? TestName { get; set; }
+
+    [Parameter]
+    public EventCallback TestCallBack { get; set; }
+
+    [CascadingParameter]
+    public Demo _demo { get; set; }
+
+    public void UpdateValue()
+    {
+        _demo.Value = 50;
+    }
+}

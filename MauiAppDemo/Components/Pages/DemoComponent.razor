@@ -1,0 +1,16 @@
+﻿@page "/democomponent"
+
+<h3>DemoComponent</h3>
+
+<label>Name: @NewName</label>
+
+<NewComponent TestName="Santosh" TestCallBack="EventCallBackMethod"></NewComponent>
+
+@code {
+    private string NewName = "Default Action";
+
+    private void EventCallBackMethod()
+    {
+        NewName = "Call Back Function";
+    }
+}

@@ -11,12 +11,16 @@
         </div>
 
         <article class="content px-4">
-            @Body
+            <CascadingValue Value="_demo">
+                @Body
+            </CascadingValue>
         </article>
     </main>
 </div>
 
 @code {
+    private Demo _demo = new();
+
     protected override void OnInitialized()
     {
         UserService.SeedUsers();

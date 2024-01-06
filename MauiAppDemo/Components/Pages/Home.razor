@@ -4,6 +4,8 @@
 
 Welcome to your new app.
 
+<p>Cascading Value: @_demo.Value</p>
+
 <input type="text" @bind="NewValue" @oninput="OnInputChange" />
 
 <label>@TestField</label>
@@ -13,6 +15,9 @@ Welcome to your new app.
 @code {
     public string? TestField = null;
     public string? NewValue = null;
+
+    [CascadingParameter]
+    public Demo _demo { get; set; }
 
     private void OnInputChange(ChangeEventArgs eventArgs)
     {
